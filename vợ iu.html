@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday to Vịu ơ:))</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Giao diện trái tim */
+        .heart-container {
+            cursor: pointer;
+            transition: transform 0.5s ease;
+            position: relative;
+            height: 500px;
+        }
+
+        .heart-wrapper {
+            position: relative;
+            width: 200px;
+            height: 180px;
+            margin: 200px auto 0;
+        }
+
+        .heart {
+            width: 200px;
+            height: 180px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: all 2s ease;
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            width: 105px;
+            height: 170px;
+            background: linear-gradient(to bottom, #ff0a2e, #cc0022);
+            border-radius: 100px 100px 0 0;
+            position: absolute;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            transition: all 2s ease;
+        }
+
+        .heart:before {
+            left: 104px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        /* Hiệu ứng trái tim mở rộng DẦN DẦN khi click */
+        .heart-expand {
+            animation: none;
+            animation: expandHeart 2s ease-in-out forwards;
+        }
+
+        @keyframes expandHeart {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 0.7;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        .heart-left {
+            z-index: 3;
+        }
+
+        .heart-right {
+            z-index: 2;
+        }
+
+        .heart-glow {
+            position: absolute;
+            width: 220px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            top: -10px;
+            left: -10px;
+            z-index: 1;
+            animation: pulse 2s infinite;
+        }
+
+        .glow-expand {
+            animation: expandGlow 2s ease-in-out forwards;
+        }
+
+        @keyframes expandGlow {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(2);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* Thiên thần tình yêu */
+        .cupid {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            top: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            animation: flyCupid 4s ease-in-out infinite;
+            font-size: 120px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+        }
+
+        .click-text {
+            margin-top: 40px;
+            color: #fff;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            animation: textPulse 2s infinite;
+        }
+
+        /* Giao diện ảnh và lời chúc */
+        .birthday-container {
+            display: none;
+            width: 100%;
+        }
+
+        .title {
+            color: #fff;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-image-container {
+            width: 100%;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 100%;
+            max-width: 600px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 8px solid white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .main-image:hover {
+            transform: scale(1.02);
+        }
+
+        .image-counter {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .caption {
+            margin-top: 20px;
+            color: #fff;
+            font-size: 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Nút điều khiển nhạc */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .music-icon {
+            font-size: 24px;
+            color: #ff0a2e;
+        }
+
+        .music-paused {
+            opacity: 0.6;
+        }
+
+        .music-info {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #ff0a2e;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Thông báo upload nhạc */
+        .upload-notice {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 14px;
+            color: #ff0a2e;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1001;
+            text-align: center;
+        }
+
+        /* Animation thiên thần */
+        @keyframes flyCupid {
+            0%, 100% { 
+                transform: translateX(-50%) translateY(0) rotate(0deg);
+            }
+            25% { 
+                transform: translateX(-45%) translateY(-15px) rotate(-8deg);
+            }
+            50% { 
+                transform: translateX(-55%) translateY(-10px) rotate(0deg);
+            }
+            75% { 
+                transform: translateX(-50%) translateY(-20px) rotate(8deg);
+            }
+        }
+
+        /* Hiệu ứng trái tim PHẬP PHỒNG */
+        @keyframes heartbeat {
+            0% { 
+                transform: scale(1);
+            }
+            15% { 
+                transform: scale(1.1);
+            }
+            30% { 
+                transform: scale(1);
+            }
+            45% { 
+                transform: scale(1.15);
+            }
+            60% { 
+                transform: scale(1);
+            }
+            75% { 
+                transform: scale(1.08);
+            }
+            100% { 
+                transform: scale(1);
+            }
+        }
+
+        /* Hiệu ứng pháo hoa */
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        .firework-piece {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: explode 1.5s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .spark {
+            position: absolute;
+            width: 3px;
+            height: 15px;
+            background: linear-gradient(to top, transparent, var(--color));
+            border-radius: 2px;
+            animation: sparkle 1s ease-out forwards;
+        }
+
+        @keyframes sparkle {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes heartbeat-image {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.03); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.03); }
+            60% { transform: scale(1); }
+            100% { transform: scale(1); }
+        }
+
+        .heartbeat-image {
+            animation: heartbeat-image 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat-caption {
+            0% { 
+                transform: scale(1);
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+            15% { 
+                transform: scale(1.05);
+                background-color: rgba(255, 255, 255, 0.4);
+            }
+            30% { 
+                transform: scale(1);
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+            45% { 
+                transform: scale(1.05);
+                background-color: rgba(255, 255, 255, 0.4);
+            }
+            60% { 
+                transform: scale(1);
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+            100% { 
+                transform: scale(1);
+                background-color: rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .heartbeat-caption {
+            animation: heartbeat-caption 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; transform: scale(0.9); }
+            50% { opacity: 0.8; transform: scale(1); }
+            100% { opacity: 0.5; transform: scale(0.9); }
+        }
+
+        @keyframes textPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeOutIn {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .image-change {
+            animation: fadeOutIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Nút điều khiển nhạc -->
+    <div class="music-control" id="musicControl">
+        <div class="music-icon">♪</div>
+    </div>
+
+  
+    <div class="container">
+        <!-- Giao diện trái tim ban đầu -->
+        <div class="heart-container" id="heartContainer">
+            <!-- Thiên thần tình yêu -->
+            <div class="cupid">👼</div>
+            
+            <!-- Trái tim chính -->
+            <div class="heart-glow" id="heartGlow"></div>
+            <div class="heart-wrapper">
+                <div class="heart heart-left" id="heartLeft"></div>
+                <div class="heart heart-right" id="heartRight"></div>
+            </div>
+            <div class="click-text">Người đẹp xin hãy từ từ :))</div>
+        </div>
+
+        <!-- Giao diện ảnh và lời chúc -->
+        <div class="birthday-container" id="birthdayContainer">
+            <h1 class="title">Chúc Mừng Sinh Nhật Đằng ấy!</h1>
+            
+            <div class="main-image-container">
+                <img src="https://i.ibb.co/zVCjbJcz/d3274573-9f34-4a99-bae2-4c775e6e2099.jpg" alt="Ảnh sinh nhật" class="main-image" id="mainImage">
+                <div class="image-counter" id="imageCounter">1/3</div>
+            </div>
+            
+            <div class="caption" id="imageCaption">Chúc Hà Anh sinh nhật vui vẻ!</div>
+        </div>
+    </div>
+
+    <!-- Phần tử audio để phát nhạc - ĐÃ SỬA LINK NHẠC -->
+    <audio id="backgroundMusic" loop>
+        <!-- Link nhạc mới từ nguồn khác -->
+        <source src="http://tmpfiles.org/dl/7176859/ssstik.io_1762443014857.mp3" type="audio/mpeg">
+        <!-- Dự phòng -->
+        <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">
+        Trình duyệt của bạn không hỗ trợ phát nhạc.
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const heartContainer = document.getElementById('heartContainer');
+            const heartLeft = document.getElementById('heartLeft');
+            const heartRight = document.getElementById('heartRight');
+            const heartGlow = document.getElementById('heartGlow');
+            const birthdayContainer = document.getElementById('birthdayContainer');
+            const mainImage = document.getElementById('mainImage');
+            const imageCaption = document.getElementById('imageCaption');
+            const imageCounter = document.getElementById('imageCounter');
+            const musicControl = document.getElementById('musicControl');
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            const musicInfo = document.getElementById('musicInfo');
+            const uploadNotice = document.getElementById('uploadNotice');
+            
+            // Danh sách ảnh và lời chúc
+            const images = [
+                {
+                    src: "https://i.ibb.co/zVCjbJcz/d3274573-9f34-4a99-bae2-4c775e6e2099.jpg",
+                    caption: "Chúc đằng ấy:)) sinh nhật vui vẻ!"
+                },
+                {
+                    src: "https://i.ibb.co/xSjQxhk8/38653dac-ad83-4913-9021-333498f4577b-1.jpg",
+                    caption: "Mong rằng mọi điều tốt đẹp nhất sẽ đến với em!"
+                },
+                {
+                    src: "https://i.ibb.co/b5X671jH/6758f926-c8d3-4e65-ab57-f5e6485f6b71.jpg",
+                    caption: "Lo mà ăn uống, mặc ấm vào nhé, đừng để ốm nha, cần gì thì bảo:(("
+                }
+            ];
+            
+            let currentImageIndex = 0;
+            let isMusicPlaying = false;
+            let musicLoaded = false;
+
+            // Ẩn thông báo sau 5 giây
+            setTimeout(() => {
+                uploadNotice.style.display = 'none';
+            }, 5000);
+
+            // Tạo pháo hoa nổ tung liên tục
+            function createContinuousFireworks() {
+                setInterval(() => {
+                    createExplosion();
+                }, 800);
+            }
+            
+            // Tạo hiệu ứng nổ tung
+            function createExplosion() {
+                const colors = ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff', '#ff9900', '#ff66cc'];
+                const container = document.querySelector('.container');
+                
+                const centerX = Math.random() * window.innerWidth;
+                const centerY = Math.random() * window.innerHeight;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                const explosion = document.createElement('div');
+                explosion.className = 'firework';
+                explosion.style.left = centerX + 'px';
+                explosion.style.top = centerY + 'px';
+                explosion.style.backgroundColor = color;
+                explosion.style.boxShadow = `0 0 20px ${color}`;
+                container.appendChild(explosion);
+                
+                for (let i = 0; i < 30; i++) {
+                    const piece = document.createElement('div');
+                    piece.className = 'firework-piece';
+                    piece.style.left = centerX + 'px';
+                    piece.style.top = centerY + 'px';
+                    piece.style.backgroundColor = color;
+                    piece.style.setProperty('--tx', (Math.random() - 0.5) * 200 + 'px');
+                    piece.style.setProperty('--ty', (Math.random() - 0.5) * 200 + 'px');
+                    piece.style.animationDelay = (Math.random() * 0.5) + 's';
+                    container.appendChild(piece);
+                    
+                    setTimeout(() => {
+                        if (piece.parentNode) piece.parentNode.removeChild(piece);
+                    }, 2000);
+                }
+                
+                for (let i = 0; i < 12; i++) {
+                    const spark = document.createElement('div');
+                    spark.className = 'spark';
+                    spark.style.left = centerX + 'px';
+                    spark.style.top = centerY + 'px';
+                    spark.style.setProperty('--color', color);
+                    spark.style.transform = `rotate(${i * 30}deg)`;
+                    spark.style.animationDelay = (Math.random() * 0.3) + 's';
+                    container.appendChild(spark);
+                    
+                    setTimeout(() => {
+                        if (spark.parentNode) spark.parentNode.removeChild(spark);
+                    }, 1500);
+                }
+                
+                setTimeout(() => {
+                    if (explosion.parentNode) explosion.parentNode.removeChild(explosion);
+                }, 1000);
+            }
+            
+            // Bắt đầu pháo hoa liên tục
+            createContinuousFireworks();
+            
+            // Hàm thử phát nhạc
+            function tryPlayMusic() {
+                if (!isMusicPlaying && musicLoaded) {
+                    backgroundMusic.play()
+                        .then(() => {
+                            isMusicPlaying = true;
+                            musicControl.innerHTML = '♪';
+                            musicControl.classList.remove('music-paused');
+                            musicInfo.innerHTML = 'Nhạc đang phát ♪';
+                        })
+                        .catch(error => {
+                            console.log('Lỗi phát nhạc:', error);
+                            musicInfo.innerHTML = 'Click vào trang để nghe nhạc ♪';
+                        });
+                }
+            }
+
+            // Sự kiện khi nhạc đã tải
+            backgroundMusic.addEventListener('canplaythrough', function() {
+                musicLoaded = true;
+                musicInfo.innerHTML = 'Nhạc đã sẵn sàng! Click để nghe ♪';
+            });
+
+            // Sự kiện lỗi nhạc
+            backgroundMusic.addEventListener('error', function() {
+                musicInfo.innerHTML = 'Lỗi tải nhạc. Đang thử bài khác...';
+                // Tự động chuyển sang bài dự phòng
+                setTimeout(() => {
+                    backgroundMusic.innerHTML = '<source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.wav" type="audio/wav">';
+                    backgroundMusic.load();
+                }, 2000);
+            });
+
+            // Cho phép phát nhạc khi click vào trang
+            document.body.addEventListener('click', function() {
+                if (!musicLoaded) {
+                    backgroundMusic.load();
+                }
+                tryPlayMusic();
+            }, { once: true });
+            
+            // Xử lý sự kiện click vào nút điều khiển nhạc
+            musicControl.addEventListener('click', function(event) {
+                event.stopPropagation();
+                
+                if (!musicLoaded) {
+                    musicInfo.innerHTML = 'Nhạc đang tải...';
+                    backgroundMusic.load();
+                    return;
+                }
+                
+                if (isMusicPlaying) {
+                    backgroundMusic.pause();
+                    musicControl.innerHTML = '♪';
+                    musicControl.classList.add('music-paused');
+                    isMusicPlaying = false;
+                    musicInfo.innerHTML = 'Nhạc đã tạm dừng';
+                } else {
+                    backgroundMusic.play()
+                        .then(() => {
+                            musicControl.innerHTML = '♪';
+                            musicControl.classList.remove('music-paused');
+                            isMusicPlaying = true;
+                            musicInfo.innerHTML = 'Nhạc đang phát ♪';
+                        })
+                        .catch(error => {
+                            musicInfo.innerHTML = 'Lỗi phát nhạc';
+                        });
+                }
+            });
+            
+            // Xử lý sự kiện click vào trái tim
+            heartContainer.addEventListener('click', function() {
+                heartLeft.classList.add('heart-expand');
+                heartRight.classList.add('heart-expand');
+                heartGlow.classList.add('glow-expand');
+                
+                createHeartExplosion();
+                
+                setTimeout(function() {
+                    heartContainer.style.display = 'none';
+                    birthdayContainer.style.display = 'block';
+                    birthdayContainer.classList.add('fade-in');
+                    
+                    mainImage.classList.add('heartbeat-image');
+                    imageCaption.classList.add('heartbeat-caption');
+                }, 2000);
+            });
+            
+            function createHeartExplosion() {
+                const heartRect = heartContainer.getBoundingClientRect();
+                const centerX = heartRect.left + heartRect.width / 2;
+                const centerY = heartRect.top + heartRect.height / 2;
+                
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        createExplosionAt(centerX + (Math.random() - 0.5) * 100, 
+                                        centerY + (Math.random() - 0.5) * 100);
+                    }, i * 200);
+                }
+            }
+            
+            function createExplosionAt(x, y) {
+                const colors = ['#ff0000', '#ffff00', '#ff9900', '#ff66cc'];
+                const container = document.querySelector('.container');
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                const explosion = document.createElement('div');
+                explosion.className = 'firework';
+                explosion.style.left = x + 'px';
+                explosion.style.top = y + 'px';
+                explosion.style.backgroundColor = color;
+                explosion.style.boxShadow = `0 0 25px ${color}`;
+                explosion.style.width = '8px';
+                explosion.style.height = '8px';
+                container.appendChild(explosion);
+                
+                for (let i = 0; i < 20; i++) {
+                    const piece = document.createElement('div');
+                    piece.className = 'firework-piece';
+                    piece.style.left = x + 'px';
+                    piece.style.top = y + 'px';
+                    piece.style.backgroundColor = color;
+                    piece.style.setProperty('--tx', (Math.random() - 0.5) * 150 + 'px');
+                    piece.style.setProperty('--ty', (Math.random() - 0.5) * 150 + 'px');
+                    container.appendChild(piece);
+                    
+                    setTimeout(() => {
+                        if (piece.parentNode) piece.parentNode.removeChild(piece);
+                    }, 2000);
+                }
+                
+                setTimeout(() => {
+                    if (explosion.parentNode) explosion.parentNode.removeChild(explosion);
+                }, 1000);
+            }
+            
+            // Xử lý sự kiện click vào ảnh để chuyển ảnh tiếp theo
+            mainImage.addEventListener('click', function() {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                
+                mainImage.classList.add('image-change');
+                
+                setTimeout(() => {
+                    mainImage.src = images[currentImageIndex].src;
+                    imageCaption.textContent = images[currentImageIndex].caption;
+                    imageCounter.textContent = `${currentImageIndex + 1}/${images.length}`;
+                    
+                    mainImage.classList.add('heartbeat-image');
+                    imageCaption.classList.add('heartbeat-caption');
+                }, 250);
+                
+                setTimeout(() => {
+                    mainImage.classList.remove('image-change');
+                }, 500);
+            });
+
+            // Tự động thử tải nhạc
+            setTimeout(() => {
+                if (!musicLoaded) {
+                    backgroundMusic.load();
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
